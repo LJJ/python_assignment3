@@ -34,8 +34,8 @@ border = 5.0
 highwayLength = 20
 
 class Map:
-    width = 160
-    height = 120
+    width = 100
+    height = 100
 
 
     def __init__(self, width = 160, height = 120):
@@ -49,6 +49,7 @@ class Map:
         self.goal = None
         self.algorithm = None
         self.hardRecord = {}
+        self.initialPoint = None
 
     def prepare(self):
         master = Tk()
@@ -194,7 +195,7 @@ class Map:
                         if self.mapData[k][j] is not "T":
                             self.mapData[k][j] = "T"
                             self.hardRecord[key(j,k)] = "T"
-                            # self.w.create_rectangle(unit*j+border,unit*k+border,unit*(j+1)+border,unit*(k+1)+border, fill="gray")
+                            self.w.create_rectangle(unit*j+border,unit*k+border,unit*(j+1)+border,unit*(k+1)+border, fill="gray")
     
         while len(self.allHighways)<4:
             highway = []
@@ -228,7 +229,7 @@ class Map:
             y = random.randrange(0, self.height)
             if self.mapData[y][x] not in ["H","T","B"]:
                 self.mapData[y][x] = "B"
-                # self.w.create_rectangle(unit*x+border, unit*y+border, unit*(x+1)+border, unit*(y+1)+border, fill="black")
+                self.w.create_rectangle(unit*x+border, unit*y+border, unit*(x+1)+border, unit*(y+1)+border, fill="black")
                 num_blocked += 1
         return self.mapData
     
@@ -323,3 +324,6 @@ class Map:
                         nextLoc = MapLocation(x,y+1)
                         self.w.create_line(self.realX(curLoc),self.realY(curLoc),self.realX(nextLoc),self.realY(nextLoc), fill="blue")
         return self.mapData
+
+
+
