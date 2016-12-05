@@ -1,11 +1,17 @@
 __author__ = 'lujiji'
 
 import  Map
+import  Action
+
 from Node import Location
-# map = Map.Map()
-# mapData = map.createMap()
-# map.saveMap()
-# Map.mainloop()
+map = Map.Map()
+mapData = map.createMap()
+map.saveMap()
+
+initialX, initialY = Action.createIntialPoints(map)
+Action.generateConsecutivePoints(initialX, initialY, map)
+
+
 
 
 def calculate(location, action, most):
@@ -65,3 +71,8 @@ for i in range(0, len(actions)):
 
 for i in result:
     print(i)
+
+Map.mainloop()
+
+
+
