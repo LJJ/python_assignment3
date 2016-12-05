@@ -26,6 +26,9 @@ class Location:
     # def fValue(self):
     #     return self.gValue + self.hValue
 
+    def preLocation(self, action):
+        return Location(self.x - action[1], self.y - action[0])
+
     def key(self):
         return "%d,%d" % (self.x,self.y)
 
