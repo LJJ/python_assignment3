@@ -34,9 +34,6 @@ border = 5.0
 highwayLength = 20
 
 class Map:
-    width = 100
-    height = 100
-
 
     def __init__(self, width = 160, height = 120):
         self.width = width

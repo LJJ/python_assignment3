@@ -5,16 +5,17 @@ import  Action
 import algorithm
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 
-#
+
 # map = Map.Map(100,100)
 # mapData = map.createMap()
 # # map.saveMap()
 # # mapData = map.readMap()
 #
 # initialX, initialY = Action.createIntialPoints(map)
-# pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map)
+# pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map, steps=100)
 # Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
 # # initialX, initialY, pointX, pointY, sensorReading, alpha = Action.readTraj()
 #
@@ -47,15 +48,15 @@ import numpy as np
 # proMap, maxResult = al.start(False)
 # print( maxResult)
 # print(pointX[-1], pointY[-1])
-# diff = abs(maxResult["location"][0]-pointY[-1]) + abs(maxResult["location"][1]-pointX[-1])
-# print(diff)
+# # diff = abs(maxResult["location"][0]-pointY[-1]) + abs(maxResult["location"][1]-pointX[-1])
+# # print(diff)
 # # print(maxResult)
 #
 # # for i in proMap:
 # #     print(i)
 # map.drawHeatMap(proMap, maxResult)
 # # heatmap = plt.pcolor(proMap)
-# Map.mainloop()
+# # Map.mainloop()
 # # for y in range(len(proMap)):
 # #     for x in range(len(proMap[y])):
 # #         proMap[y][x] *= 100
@@ -66,12 +67,14 @@ import numpy as np
 
 def experiment():
     expResult = []
-    for i in range(100):
+
+    for i in range(40):
+        print(i)
         rowResult = []
         map = Map.Map(100,100)
         mapData = map.createMap()
         initialX, initialY = Action.createIntialPoints(map)
-        pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map)
+        pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map, steps=100)
         Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
         actions = [0 for i in range(100)]
         for i in range(len(alpha)):
@@ -85,9 +88,9 @@ def experiment():
                 actions[i] = (-1,0)
         observation = sensorReading
         al = algorithm.Algorithm(mapData, actions, observation)
-        proMap, maxResult = al.start(False)
+        proMap, maxResult = al.start(True)
         for i in range(5,len(maxResult)):
-            diff = abs(maxResult[i]["location"][0]-initialY) + abs(maxResult[i]["location"][1]-initialX)
+            diff = abs(maxResult[i]["location"][0]-pointY[i]) + abs(maxResult[i]["location"][1]-pointX[i])
             rowResult.append(diff)
         expResult.append(rowResult)
 
@@ -97,7 +100,6 @@ def experiment():
         for row in expResult:
             total += row[i]
         avarage_result.append(total/len(expResult))
-
     print(avarage_result)
 
 

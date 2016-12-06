@@ -14,18 +14,18 @@ def createIntialPoints(Map):
     print initialX, initialY
     return initialX, initialY
 
-def generateConsecutivePoints(initialX, initialY, Map):
+def generateConsecutivePoints(initialX, initialY, Map, steps):
     currentX = initialX
     currentY = initialY
-    alpha = [None for i in range(100)]
-    sensorReading = [None for i in range(100)]
+    alpha = [None for i in range(steps)]
+    sensorReading = [None for i in range(steps)]
 
     Idx = 0
-    pointX = [0 for i in range(101)]
-    pointY = [0 for i in range(101)]
+    pointX = [0 for i in range(steps + 1)]
+    pointY = [0 for i in range(steps + 1)]
     pointX[0] = initialX
     pointY[0] = initialY
-    for i in range(0, 100):
+    for i in range(0, steps):
         transition= random.randrange(0, 10)
         if transition == 0:
             currentX = pointX[i]
@@ -44,22 +44,22 @@ def generateConsecutivePoints(initialX, initialY, Map):
             if direction == 0:
                 alpha[i] = 'U'
                 currentY = pointY[i] + 1
-                if Map.mapData[currentY][currentX] == "B":
+                if currentY > 99 or Map.mapData[currentY][currentX] == "B":
                     currentY = pointY[i]
             elif direction == 1:
                 alpha[i] = 'L'
                 currentX = pointX[i] - 1
-                if Map.mapData[currentY][currentX] == "B":
+                if currentX < 0 or Map.mapData[currentY][currentX] == "B":
                     currentX = pointX[i]
             elif direction == 2:
                 alpha[i] = 'D'
                 currentY = pointY[i] - 1
-                if Map.mapData[currentY][currentX] == "B":
+                if currentY < 0 or Map.mapData[currentY][currentX] == "B":
                     currentY = pointY[i]
             elif direction == 3:
                 alpha[i] = 'R'
                 currentX = pointX[i] + 1
-                if Map.mapData[currentY][currentX] == "B":
+                if currentX > 99 or Map.mapData[currentY][currentX] == "B":
                     currentX = pointX[i]
 
         # print 'aaa',alpha[i]
