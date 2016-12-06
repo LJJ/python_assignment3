@@ -65,8 +65,8 @@ def generateConsecutivePoints(initialX, initialY, Map):
         pointX[i+1] = currentX
         pointY[i+1] = currentY
         sensorReading[i] = newChar
-        print currentX, currentY
-        print newChar
+        # print currentX, currentY
+        # print newChar
 
     return pointX, pointY
 

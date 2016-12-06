@@ -16,17 +16,25 @@ Action.generateConsecutivePoints(initialX, initialY, map)
 
 def calculate(location, action, most):
     preLoc = location.preLocation(action)
+    nextLoc = location.nextLocation(action)
     obIndex = len(result)-1
-    print(location)
-    print(preLoc)
-    p = result[-1][location.y][location.x]*observeP(location,observation[obIndex])*0.1
-    if preLoc.x < 0 or preLoc.y <0 or preLoc is Location(1,2):
+
+
+    p = result[-1][location.y][location.x]*observeP(location,observation[obIndex])
+    # if location == Location(0,1) or location == Location(0,2):
+    #     print("yes")
+    if nextLoc.x <= 2 and nextLoc.y<=2:
+        if nextLoc.x != 1 or nextLoc.y != 2:
+            p *= 0.1
+    if preLoc.x < 0 or preLoc.y < 0:
+        return p
+    if preLoc.x == 1 and preLoc.y == 2:
         return p
     else:
         if most is True:
-            p = max(result[-1][preLoc.y][preLoc.x]*observeP(preLoc,observation[len(result)-1])*0.9, p)
+            p = max(result[-1][preLoc.y][preLoc.x]*observeP(location,observation[len(result)-1])*0.9, p)
         else:
-            p += result[-1][preLoc.y][preLoc.x]*observeP(preLoc,observation[len(result)-1])*0.9
+            p += result[-1][preLoc.y][preLoc.x]*observeP(location,observation[len(result)-1])*0.9
         return p
 
 
@@ -66,13 +74,15 @@ for i in range(0, len(actions)):
             if y == 2 and x == 1:
                 continue
             location = Location(x,y)
-            resultSlice[y][x] = calculate(location, actions[i], False)
+            resultSlice[y][x] = calculate(location, actions[i], True)
+    # print(resultSlice)
     result.append(normalize(resultSlice))
+    print(result[-1])
 
-for i in result:
-    print(i)
+# for i in result:
+#     print(i)
 
-Map.mainloop()
+# Map.mainloop()
 
 
 
