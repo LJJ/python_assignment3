@@ -29,6 +29,9 @@ class Location:
     def preLocation(self, action):
         return Location(self.x - action[1], self.y - action[0])
 
+    def nextLocation(self, action):
+        return Location(self.x + action[1], self.y + action[0])
+
     def key(self):
         return "%d,%d" % (self.x,self.y)
 

@@ -77,7 +77,6 @@ def generateConsecutivePoints(initialX, initialY, Map):
         sensorReading[i] = newChar
         # print currentX, currentY
         # print newChar
-
     return pointX, pointY, sensorReading, alpha
 
 def saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha):
