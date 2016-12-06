@@ -84,7 +84,7 @@ def saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha):
     f.write("%d %d" % (initialX, initialY))
     # print len(pointX), len(pointY), len(sensorReading), len(alpha)
     for i in range(0,len(sensorReading)):
-        line = "%s, %s, %s, %s ," % (pointX[i+1], pointY[i+1], sensorReading[i], alpha[i])
+        line = "%s, %s, %s, %s ," % (pointX[i+1], pointY[i+1], alpha[i], sensorReading[i])
         f.write("\n"+line[:-1])
     f.close()
 

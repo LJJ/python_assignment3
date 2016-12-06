@@ -15,13 +15,24 @@ pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX
 Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
 
 
+# mapData = [["H","H","T"],
+#        ["N","N","N"],
+#        ["N","B","H"]]
+# actions = [(0,1),(0,1),(1,0),(1,0)]
+# observation = ["N","N","H","H"]
 
+actions = [0 for i in range(100)]
+for i in range(len(alpha)):
+    if alpha[i] == 'R':
+        actions[i] = (0,1)
+    if alpha[i] == 'D':
+        actions[i] = (1,0)
+    if alpha[i] == 'L':
+        actions[i] = (0,-1)
+    if alpha[i] == 'U':
+        actions[i] = (-1,0)
 
-mapData = [["H","H","T"],
-       ["N","N","N"],
-       ["N","B","H"]]
-actions = [(0,1),(0,1),(1,0),(1,0)]
-observation = ["N","N","H","H"]
+observation = sensorReading
 
 al = algorithm.Algorithm(mapData, actions, observation)
 al.start(False)
