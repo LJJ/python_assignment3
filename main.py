@@ -74,7 +74,7 @@ for i in range(0, len(actions)):
             if y == 2 and x == 1:
                 continue
             location = Location(x,y)
-            resultSlice[y][x] = calculate(location, actions[i], True)
+            resultSlice[y][x] = calculate(location, actions[i], False)
     # print(resultSlice)
     result.append(normalize(resultSlice))
     print(result[-1])
