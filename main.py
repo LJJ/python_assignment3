@@ -3,27 +3,23 @@ __author__ = 'lujiji'
 import  Map
 import  Action
 import algorithm
-import matplotlib.pyplot as plt
-import numpy as np
-
-
 
 map = Map.Map(100,100)
-mapData = map.createMap()
-map.saveMap()
+# mapData = map.createMap()
+# map.saveMap()
+mapData = map.readMap()
 
 steps = 100
-# mapData = map.readMap()
 
 initialX, initialY = Action.createIntialPoints(map)
 pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map, steps)
 
-# Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
+Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
 
-pointX, pointY, sensorReading, alpha = Action.readTraj()
+# pointX, pointY, sensorReading, alpha = Action.readTraj()
 
 # print(Action.readTraj())
-# Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
+
 
 # class path_id(Location):
 #     def __init__(self,x,y):
@@ -59,22 +55,24 @@ observation = sensorReading
 
 al = algorithm.Algorithm(mapData, actions, observation)
 proMap, maxResult = al.start(False)
+print( maxResult)
 # print(maxResult)
 
 # for i in proMap:
 #     print(i)
 
 
-# map.drawHeatMap(proMap, maxResult)
+map.drawHeatMap(proMap, maxResult)
 # # heatmap = plt.pcolor(proMap)
-# Map.mainloop()
+Map.mainloop()
 
 # for y in range(len(proMap)):
 #     for x in range(len(proMap[y])):
 #         proMap[y][x] *= 100
 # colorMap = np.array(proMap)
-# plt.imshow(proMap, cmap='hot')
-# plt.show()
+
+
+
 
 
 

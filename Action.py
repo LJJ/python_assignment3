@@ -44,22 +44,22 @@ def generateConsecutivePoints(initialX, initialY, Map, steps):
             if direction == 0:
                 alpha[i] = 'U'
                 currentY = pointY[i] + 1
-                if Map.mapData[currentY][currentX] == "B":
+                if Map.mapData[currentY][currentX] == "B" or currentY > 100:
                     currentY = pointY[i]
             elif direction == 1:
                 alpha[i] = 'L'
                 currentX = pointX[i] - 1
-                if Map.mapData[currentY][currentX] == "B":
+                if Map.mapData[currentY][currentX] == "B" or currentX < 0:
                     currentX = pointX[i]
             elif direction == 2:
                 alpha[i] = 'D'
                 currentY = pointY[i] - 1
-                if Map.mapData[currentY][currentX] == "B":
+                if Map.mapData[currentY][currentX] == "B" or currentY < 0:
                     currentY = pointY[i]
             elif direction == 3:
                 alpha[i] = 'R'
                 currentX = pointX[i] + 1
-                if Map.mapData[currentY][currentX] == "B":
+                if Map.mapData[currentY][currentX] == "B" or currentY > 100:
                     currentX = pointX[i]
 
         # print 'aaa',alpha[i]
