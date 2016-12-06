@@ -81,12 +81,31 @@ def generateConsecutivePoints(initialX, initialY, Map):
 
 def saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha):
     f = open("./path.txt","w")
-    f.write("%d %d" % (initialX, initialY))
+    f.write("%d,%d" % (initialX, initialY))
     # print len(pointX), len(pointY), len(sensorReading), len(alpha)
     for i in range(0,len(sensorReading)):
-        line = "%s, %s, %s, %s ," % (pointX[i+1], pointY[i+1], alpha[i], sensorReading[i])
-        f.write("\n"+line[:-1])
+        line = "%s,%s,%s,%s" % (pointX[i+1], pointY[i+1], alpha[i], sensorReading[i])
+        f.write("\n"+line)
     f.close()
+
+
+def readTraj():
+    content = open("./path.txt").read().split("\n")
+    row1 = content.pop(0)
+    initX = row1.split(",")[0]
+    initY = row1.split(",")[1]
+    xArray = []
+    yArray = []
+    sensor = []
+    actions = []
+    for line in content:
+        component = line.split(",")
+        xArray.append(int(component[0]))
+        yArray.append(int(component[1]))
+        sensor.append(component[3])
+        actions.append(component[2])
+    return xArray, yArray, sensor, actions
+
 
 
 
