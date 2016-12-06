@@ -9,7 +9,7 @@ class Algorithm:
         self.length = len(mapData)
         self.observations = observations
         self.result = []
-
+        self.maxResult = []
 
     def start(self, isMax):
         resultSlice = [[0.0 for i in range(self.length)] for j in range(self.length)]
@@ -21,17 +21,25 @@ class Algorithm:
         self.result.append(resultSlice)
 
         for i in range(0, len(self.actions)):
+            maxP = 0
+            maxLoc = None
             resultSlice = [[0.0 for m in range(self.length)] for n in range(self.length)]
             for y in range(self.length):
                 for x in range(len(self.mapData[y])):
                     if self.mapData[y][x] is "B":
                         continue
                     location = Location(x,y)
-                    resultSlice[y][x] = self.calculate(location, self.actions[i], isMax)
-            # print(resultSlice)
-            self.result.append(self.normalize(resultSlice))
-            # print(self.result[-1])
-        return self.result[5]
+                    p = self.calculate(location, self.actions[i], isMax)
+                    resultSlice[y][x] = p
+                    if p>maxP:
+                        maxP = p
+                        maxLoc = (location.y,location.x)
+            nor_data, a = self.normalize(resultSlice)
+            self.result.append(nor_data)
+            self.maxResult.append({"location":maxLoc,"p":maxP*a})
+        # print(len(self.result), len(self.maxResult))
+        return self.result[-1], self.maxResult[-1]
+
 
     def isValid(self, location):
         if location.x < self.length and location.y<self.length and location.x>=0 and location.y>=0:
@@ -64,8 +72,11 @@ class Algorithm:
             return 0.05
 
     def normalize(self,resultSlice):
-        a = 1.0/(sum(resultSlice[0])+sum(resultSlice[1])+sum(resultSlice[2]))
+        total = 0.0
+        for row in resultSlice:
+            total += sum(row)
+        a = 1.0/total
         for y in range(len(resultSlice)):
             for x in range(len(resultSlice[y])):
                 resultSlice[y][x] *= a
-        return resultSlice
+        return resultSlice, a
