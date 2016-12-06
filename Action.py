@@ -14,18 +14,18 @@ def createIntialPoints(Map):
     print initialX, initialY
     return initialX, initialY
 
-def generateConsecutivePoints(initialX, initialY, Map):
+def generateConsecutivePoints(initialX, initialY, Map, steps):
     currentX = initialX
     currentY = initialY
-    alpha = [None for i in range(100)]
-    sensorReading = [None for i in range(100)]
+    alpha = [None for i in range(steps)]
+    sensorReading = [None for i in range(steps)]
 
     Idx = 0
-    pointX = [0 for i in range(101)]
-    pointY = [0 for i in range(101)]
+    pointX = [0 for i in range(steps + 1)]
+    pointY = [0 for i in range(steps + 1)]
     pointX[0] = initialX
     pointY[0] = initialY
-    for i in range(0, 100):
+    for i in range(0, steps):
         transition= random.randrange(0, 10)
         if transition == 0:
             currentX = pointX[i]

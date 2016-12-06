@@ -9,8 +9,10 @@ map = Map.Map(100,100)
 mapData = map.createMap()
 map.saveMap()
 
+steps = 100
+
 initialX, initialY = Action.createIntialPoints(map)
-pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map)
+pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map, steps)
 
 Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
 
@@ -38,10 +40,7 @@ al = algorithm.Algorithm(mapData, actions, observation)
 al.start(False)
 
 
-# for i in result:
-#     print(i)
 
-# Map.mainloop()
 
 
 
