@@ -9,9 +9,9 @@ mapData = map.createMap()
 map.saveMap()
 
 initialX, initialY = Action.createIntialPoints(map)
-Action.generateConsecutivePoints(initialX, initialY, map)
+pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map)
 
-
+Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
 
 
 def calculate(location, action, most):

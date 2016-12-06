@@ -30,29 +30,39 @@ def generateConsecutivePoints(initialX, initialY, Map):
         if transition == 0:
             currentX = pointX[i]
             currentY = pointY[i]
+            direction = random.randrange(0, 4)
+            if direction == 0:
+                alpha[i] = 'U'
+            elif direction == 1:
+                alpha[i] = 'L'
+            elif direction == 2:
+                alpha[i] = 'D'
+            elif direction == 3:
+                alpha[i] = 'R'
         else:
             direction = random.randrange(0, 4)
             if direction == 0:
+                alpha[i] = 'U'
                 currentY = pointY[i] + 1
                 if Map.mapData[currentY][currentX] == "B":
                     currentY = pointY[i]
-                alpha[i] = 'U'
             elif direction == 1:
+                alpha[i] = 'L'
                 currentX = pointX[i] - 1
                 if Map.mapData[currentY][currentX] == "B":
                     currentX = pointX[i]
-                alpha[i] = 'L'
             elif direction == 2:
+                alpha[i] = 'D'
                 currentY = pointY[i] - 1
                 if Map.mapData[currentY][currentX] == "B":
                     currentY = pointY[i]
-                alpha[i] = 'D'
             elif direction == 3:
+                alpha[i] = 'R'
                 currentX = pointX[i] + 1
                 if Map.mapData[currentY][currentX] == "B":
                     currentX = pointX[i]
-                alpha[i] = 'R'
 
+        print 'aaa',alpha[i]
         observation = random.randrange(0, 10)
         if observation == 0:
             cells = ['N', 'H', 'T']
@@ -65,10 +75,19 @@ def generateConsecutivePoints(initialX, initialY, Map):
         pointX[i+1] = currentX
         pointY[i+1] = currentY
         sensorReading[i] = newChar
-        print currentX, currentY
-        print newChar
+        # print currentX, currentY
+        # print newChar
 
-    return pointX, pointY
+    return pointX, pointY, sensorReading, alpha
+
+def saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha):
+    f = open("./path.txt","w")
+    f.write("%d %d" % (initialX, initialY))
+    print len(pointX), len(pointY), len(sensorReading), len(alpha)
+    for i in range(0,len(sensorReading)):
+        line = "%s, %s, %s, %s ," % (pointX[i+1], pointY[i+1], sensorReading[i], alpha[i])
+        f.write("\n"+line[:-1])
+    f.close()
 
 
 
