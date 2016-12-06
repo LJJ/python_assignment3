@@ -3,7 +3,7 @@ __author__ = 'lujiji'
 import  Map
 import  Action
 import algorithm
-
+from Node import Location
 
 map = Map.Map(100,100)
 mapData = map.createMap()
@@ -16,6 +16,18 @@ pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX
 
 Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
 
+# class path_id(Location):
+#     def __init__(self,x,y):
+#         self.x = x
+#         self.y = y
+#
+# for i in range(len(pointX)):
+#     path_id.append = pointX[i], pointY[i]
+#
+# for i in range(len(pointX)):
+#     map.DrawLines(path_id[i], path_id)
+#
+# Map.mainloop()
 
 # mapData = [["H","H","T"],
 #        ["N","N","N"],
@@ -37,10 +49,13 @@ for i in range(len(alpha)):
 observation = sensorReading
 
 al = algorithm.Algorithm(mapData, actions, observation)
-al.start(False)
+proMap = al.start(False)
 
 
-
+# for i in result:
+#     print(i)
+# map.drawHeatMap(proMap)
+# Map.mainloop()
 
 
 
