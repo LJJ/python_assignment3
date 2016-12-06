@@ -38,7 +38,7 @@ class Algorithm:
             self.result.append(nor_data)
             self.maxResult.append({"location":maxLoc,"p":maxP*a})
         # print(len(self.result), len(self.maxResult))
-        return self.result[-1], self.maxResult[-1]
+        return self.result[-1], self.maxResult
 
 
     def isValid(self, location):

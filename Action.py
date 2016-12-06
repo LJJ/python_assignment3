@@ -92,8 +92,8 @@ def saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha):
 def readTraj():
     content = open("./path.txt").read().split("\n")
     row1 = content.pop(0)
-    initX = row1.split(",")[0]
-    initY = row1.split(",")[1]
+    initX = int(row1.split(",")[0])
+    initY = int(row1.split(",")[1])
     xArray = []
     yArray = []
     sensor = []
@@ -104,7 +104,7 @@ def readTraj():
         yArray.append(int(component[1]))
         sensor.append(component[3])
         actions.append(component[2])
-    return xArray, yArray, sensor, actions
+    return initX, initY, xArray, yArray, sensor, actions
 
 
 
