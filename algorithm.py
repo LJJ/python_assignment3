@@ -11,17 +11,17 @@ class Algorithm:
 
 
     def start(self, isMax):
-        resultSlice = [[0.0 for i in range(3)] for j in range(3)]
+        resultSlice = [[0.0 for i in range(len(self.mapData))] for j in range(len(self.mapData))]
         for y in range(len(self.mapData)):
             for x in range(len(self.mapData[y])):
                 if y == 2 and x == 1:
                     continue
-                resultSlice[y][x] = 1.0/8
+                resultSlice[y][x] = 1.0/(len(self.mapData)*len(self.mapData)*0.8)
         self.result.append(resultSlice)
 
 
         for i in range(0, len(self.actions)):
-            resultSlice = [[0.0 for m in range(3)] for n in range(3)]
+            resultSlice = [[0.0 for m in range(len(self.mapData))] for n in range(len(self.mapData))]
             for y in range(len(self.mapData)):
                 for x in range(len(self.mapData[y])):
                     if y == 2 and x == 1:
