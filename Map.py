@@ -234,13 +234,19 @@ class Map:
         return self.mapData
 
     def drawHeatMap(self, proMap, maxResult):
+        num1 = 0
+        num2 = 0
         for y in range(len(proMap)):
             for x in range(len(proMap[y])):
                 p = proMap[y][x]
+
+                if 255.0 *p/maxResult["p"]< 0.2:
+                    num1+=1
                 re = 255.0 *p/maxResult["p"]
                 mycolor = '#%02x%02x%02x' % (re,0,0)
                 self.w.create_rectangle(unit*x+border,unit*y+border,unit*(x+1)+border,unit*(y+1)+border, fill=mycolor)
-    
+        print(num1)
+
     def GenerateStartGoal(self):
         possibility= random.randrange(0, 2)
         position_x = possibility*random.randrange(0, 20)+ (1-possibility)*random.randrange(self.width-20, self.width)
@@ -302,35 +308,35 @@ class Map:
         content = open("./test.txt").read()
         lines = content.split("\n")
         self.mapData = []
-        self.start = Location(int(lines[0].split(",")[0]),int(lines[0].split(",")[1]))
-        self.goal = Location(int(lines[1].split(",")[0]),int(lines[1].split(",")[1]))
-        self.width = int(lines[10].split(",")[1])
-        self.height = int(lines[10].split(",")[0])
+        # self.start = Location(int(lines[0].split(",")[0]),int(lines[0].split(",")[1]))
+        # self.goal = Location(int(lines[1].split(",")[0]),int(lines[1].split(",")[1]))
+        # self.width = int(lines[10].split(",")[1])
+        # self.height = int(lines[10].split(",")[0])
         self.prepare()
-        for i in range(11, len(lines)):
+        for i in range(1, len(lines)):
             self.mapData.append(lines[i].split(","))
             # print(id(mapData))
     
         self.createGrid()
-        for y in range(0,len(self.mapData)):
-            for x in range(0,len(self.mapData[y])):
-                status = self.mapData[y][x]
-                if status is "0":
-                    self.w.create_rectangle(x*unit+border,y*unit+border,(x+1)*unit+border,(y+1)*unit+border, fill="black")
-                elif status is "2" or "b" in status:
-                    self.w.create_rectangle(x*unit+border,y*unit+border,(x+1)*unit+border,(y+1)*unit+border, fill="gray")
-        for y in range(0,len(self.mapData)):
-            for x in range(0,len(self.mapData[y])):
-                status = self.mapData[y][x]
-                if "b" in status or "a" in status:
-                    curLoc = MapLocation(x,y)
-                    nextLoc = None
-                    if x+1<len(self.mapData[y]) and len(self.mapData[y][x+1]) == 2 and status[-1] == self.mapData[y][x+1][-1]:
-                        nextLoc = MapLocation(x+1,y)
-                        self.w.create_line(self.realX(curLoc),self.realY(curLoc),self.realX(nextLoc),self.realY(nextLoc), fill="blue")
-                    if y+1<len(self.mapData) and len(self.mapData[y+1][x]) == 2 and status[-1] == self.mapData[y+1][x][-1]:
-                        nextLoc = MapLocation(x,y+1)
-                        self.w.create_line(self.realX(curLoc),self.realY(curLoc),self.realX(nextLoc),self.realY(nextLoc), fill="blue")
+        # for y in range(0,len(self.mapData)):
+        #     for x in range(0,len(self.mapData[y])):
+        #         status = self.mapData[y][x]
+        #         if status is "0":
+        #             self.w.create_rectangle(x*unit+border,y*unit+border,(x+1)*unit+border,(y+1)*unit+border, fill="black")
+        #         elif status is "2" or "b" in status:
+        #             self.w.create_rectangle(x*unit+border,y*unit+border,(x+1)*unit+border,(y+1)*unit+border, fill="gray")
+        # for y in range(0,len(self.mapData)):
+        #     for x in range(0,len(self.mapData[y])):
+        #         status = self.mapData[y][x]
+        #         if "b" in status or "a" in status:
+        #             curLoc = MapLocation(x,y)
+        #             nextLoc = None
+        #             if x+1<len(self.mapData[y]) and len(self.mapData[y][x+1]) == 2 and status[-1] == self.mapData[y][x+1][-1]:
+        #                 nextLoc = MapLocation(x+1,y)
+        #                 self.w.create_line(self.realX(curLoc),self.realY(curLoc),self.realX(nextLoc),self.realY(nextLoc), fill="blue")
+        #             if y+1<len(self.mapData) and len(self.mapData[y+1][x]) == 2 and status[-1] == self.mapData[y+1][x][-1]:
+        #                 nextLoc = MapLocation(x,y+1)
+        #                 self.w.create_line(self.realX(curLoc),self.realY(curLoc),self.realX(nextLoc),self.realY(nextLoc), fill="blue")
         return self.mapData
 
 

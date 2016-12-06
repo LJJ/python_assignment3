@@ -9,15 +9,16 @@ import numpy as np
 
 
 map = Map.Map(100,100)
-mapData = map.createMap()
-map.saveMap()
+# mapData = map.createMap()
+# map.saveMap()
+mapData = map.readMap()
 
 # initialX, initialY = Action.createIntialPoints(map)
 # pointX, pointY, sensorReading, alpha = Action.generateConsecutivePoints(initialX, initialY, map)
-
+# Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
 pointX, pointY, sensorReading, alpha = Action.readTraj()
 # print(Action.readTraj())
-# Action.saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha)
+
 
 
 # mapData = [["H","H","T"],
@@ -41,6 +42,7 @@ observation = sensorReading
 
 al = algorithm.Algorithm(mapData, actions, observation)
 proMap, maxResult = al.start(False)
+print( maxResult)
 # print(maxResult)
 
 # for i in proMap:
