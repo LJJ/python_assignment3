@@ -20,7 +20,6 @@ class Algorithm:
                 resultSlice[y][x] = 1.0/(self.length*self.length*0.8)
         self.result.append(resultSlice)
 
-
         for i in range(0, len(self.actions)):
             resultSlice = [[0.0 for m in range(self.length)] for n in range(self.length)]
             for y in range(self.length):
@@ -31,7 +30,8 @@ class Algorithm:
                     resultSlice[y][x] = self.calculate(location, self.actions[i], isMax)
             # print(resultSlice)
             self.result.append(self.normalize(resultSlice))
-            print(self.result[-1])
+            # print(self.result[-1])
+        return self.result[5]
 
     def isValid(self, location):
         if location.x < self.length and location.y<self.length and location.x>=0 and location.y>=0:

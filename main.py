@@ -35,13 +35,13 @@ for i in range(len(alpha)):
 observation = sensorReading
 
 al = algorithm.Algorithm(mapData, actions, observation)
-al.start(False)
+proMap = al.start(False)
 
 
 # for i in result:
 #     print(i)
-
-# Map.mainloop()
+map.drawHeatMap(proMap)
+Map.mainloop()
 
 
 

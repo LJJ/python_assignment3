@@ -232,6 +232,13 @@ class Map:
                 self.w.create_rectangle(unit*x+border, unit*y+border, unit*(x+1)+border, unit*(y+1)+border, fill="black")
                 num_blocked += 1
         return self.mapData
+
+    def drawHeatMap(self, proMap):
+        for y in range(len(proMap)):
+            for x in range(len(proMap[y])):
+                print(proMap[y][x])
+                mycolor = '#%02x%02x%02x' % (255.0*proMap[y][x], 0, 0)
+                self.w.create_rectangle(unit*x+border,unit*y+border,unit*(x+1)+border,unit*(y+1)+border, fill=mycolor)
     
     def GenerateStartGoal(self):
         possibility= random.randrange(0, 2)
