@@ -62,7 +62,7 @@ def generateConsecutivePoints(initialX, initialY, Map):
                 if Map.mapData[currentY][currentX] == "B":
                     currentX = pointX[i]
 
-        print 'aaa',alpha[i]
+        # print 'aaa',alpha[i]
         observation = random.randrange(0, 10)
         if observation == 0:
             cells = ['N', 'H', 'T']
@@ -83,7 +83,7 @@ def generateConsecutivePoints(initialX, initialY, Map):
 def saveTraj(initialX, initialY, pointX, pointY, sensorReading, alpha):
     f = open("./path.txt","w")
     f.write("%d %d" % (initialX, initialY))
-    print len(pointX), len(pointY), len(sensorReading), len(alpha)
+    # print len(pointX), len(pointY), len(sensorReading), len(alpha)
     for i in range(0,len(sensorReading)):
         line = "%s, %s, %s, %s ," % (pointX[i+1], pointY[i+1], sensorReading[i], alpha[i])
         f.write("\n"+line[:-1])
