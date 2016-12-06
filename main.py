@@ -5,7 +5,7 @@ import  Action
 import algorithm
 
 
-map = Map.Map()
+map = Map.Map(100,100)
 mapData = map.createMap()
 map.saveMap()
 
